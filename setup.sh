@@ -36,8 +36,6 @@ curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.0.0 sh -
 cd ./istio-1*
 export PATH=$PWD/bin:$PATH
 kubectl apply -f install/kubernetes/istio-demo-auth.yaml
-kubectl get svc -n istio-system
-kubectl get pods -n istio-system
 
 # deploy application with sidecar injection
 kubectl label namespace default istio-injection=enabled
@@ -45,7 +43,3 @@ kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
 
 # deploy the gateway
 kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
-
-# check out deployment
-kubectl get services
-kubectl get pods
