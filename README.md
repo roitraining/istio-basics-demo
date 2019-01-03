@@ -22,7 +22,7 @@ The setup script does the following:
 ### Key setup concepts
 + This deployment will work on any k8s cluster; we just happen to be using GKE.
 + Sidecar injection is used to automatically insert and configure the Envoy proxy container into pods deployed without having to change the pod/deployment definitions
-+ An Istio gateway replaces a traditional Ingress object. It works like so...
++ An Istio gateway replaces a traditional Ingress object. It works like so (to be replaced with better text/image)...
 1. A **Load Balancer** forwards traffic to a **Node**
 2. On **Node**, traffic is delivered to **Istio IngressGateway Service** 
 3. **Istio IngressGateway Service** forwards to an **Istio IngressGateway Pod**
@@ -32,13 +32,13 @@ The setup script does the following:
 
 ![enter image description here](https://blog.jayway.com/wp-content/uploads/2018/10/istio-networking.png)
 
-## Demo
+## Functionality Demo
 
 ### Intro
 1. Describe the application architecture
 1. Describe the cluster and deployment architecture
 1. Talk through the challenges in managing a mesh of services
-1. "Wouldn't be nice if we had something that made this easy"
+1. "Wouldn't be nice if we had something that made this easy?"
 
 ### Traffic routing use cases
 1. Show them app with v1 apis (run first two snippets in snippets.txt); refresh multiple times
@@ -48,8 +48,23 @@ The setup script does the following:
 1. Discuss real-world need to canary with specific users or customers
 1. Run canary by user snippet and demo login vs. no routing
 
+## Explanation
+
 ### Istio architecture
 
 
 ### Istio implementation
-1. Show stuff in Istio deployment
+1. Show services and pods deployed as part of Istio install (run istio installation snippet)
+1. Show Istio install in GKE UI (services and workloads)
+1. Show Service Graph and discuss. Run service graph snippet, and then use Cloud Shell preview pointed at port 8088. Visit `/dotviz`.
+1. Show Grafana and discuss. Run grafana snippet to build tunnel in Cloud Shell, the use Cloud Shell preview pointed to port 3000, and visit `/dashboard/db/istio-dashboard`.
+1. Show Tracining and discuss. Run tracing snippet and use Cloud Shell preview pointed at port 16686.
+
+### App implementation
+1. Show app workloads in GKE UI and discuss
+1. Show app services in GKE UI and discuss
+
+### Traffic routing 
+1. Show `samples/bookinfo/networking/virtual-service-all-v1.yaml` and discuss
+1. Show `samples/bookinfo/networking/virtual-service-reviews-v2-v3.yaml #check it out` and discuss
+1. Show`1samples/bookinfo/networking/virtual-service-reviews-test-v2.yaml` and discuss

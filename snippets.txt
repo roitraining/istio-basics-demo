@@ -13,3 +13,22 @@ kubectl apply -f samples/bookinfo/networking/virtual-service-reviews-v2-v3.yaml 
 
 # set review to canary by user
 kubectl apply -f samples/bookinfo/networking/virtual-service-reviews-test-v2.yaml
+
+# show the istio installation
+kubectl get svc -n istio-system
+kubectl get pods -n istio-system
+
+# check out service graph
+kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=servicegraph -o jsonpath='{.items[0].metadata.name}') 8088:8088 &
+
+# check out grafana
+kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=grafana -o jsonpath='{.items[0].metadata.name}') 3000:3000 &
+
+# check out tracing
+kubectl port-forward -n istio-system $(kubectl get pod -n istio-system -l app=jaeger -o jsonpath='{.items[0].metadata.name}') 16686:16686 &
+
+# show the destination rules
+kubectl get destinationrules -o yaml
+
+#do the cleanup
+. ../istio-basics-demo/cleanup.sh
