@@ -14,6 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+
+# enable api
 gcloud services enable container.googleapis.com
 
 # build the GKE cluster
@@ -29,7 +32,7 @@ kubectl create clusterrolebinding cluster-admin-binding \
 
 # install Istio
 curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.0.0 sh -
-cd ./istio-*
+cd ./istio-1*
 export PATH=$PWD/bin:$PATH
 kubectl apply -f install/kubernetes/istio-demo-auth.yaml
 kubectl get svc -n istio-system

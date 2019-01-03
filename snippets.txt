@@ -1,0 +1,15 @@
+# get the url for the app
+export GATEWAY_IP=$(kubectl get svc istio-ingressgateway -n istio-system -o json | jq '.status.loadBalancer.ingress[0].ip' | tr -d '"')
+echo "click here to show app: http://$GATEWAY_IP/productpage"
+
+# create the destination rules
+kubectl apply -f samples/bookinfo/networking/destination-rule-all-mtls.yaml
+
+# set all services to use v1
+kubectl apply -f samples/bookinfo/networking/virtual-service-all-v1.yaml
+
+# set reviews to a/b testing
+kubectl apply -f samples/bookinfo/networking/virtual-service-reviews-v2-v3.yaml #check it out
+
+# set review to canary by user
+kubectl apply -f samples/bookinfo/networking/virtual-service-reviews-test-v2.yaml

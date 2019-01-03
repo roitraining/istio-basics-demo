@@ -13,4 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-kubectl 
+kubectl delete -f samples/bookinfo/networking/bookinfo-gateway.yaml
+kubectl delete -f samples/bookinfo/platform/kube/bookinfo.yaml
+kubectl delete -f install/kubernetes/istio-demo-auth.yaml
+gcloud container clusters delete istio-demo --zone us-central1-a
