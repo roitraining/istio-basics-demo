@@ -27,8 +27,6 @@ The setup script does the following:
     * Istio IngressGateway pod forwards traffic a service.
     * Service forwards to an Pod.
 
-![enter image description here](https://blog.jayway.com/wp-content/uploads/2018/10/istio-networking.png)
-
 ## Demo
 
 ### Intro
