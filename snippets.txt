@@ -1,3 +1,7 @@
+# generate background load
+export GATEWAY_IP=$(kubectl get svc istio-ingressgateway -n istio-system -o json | jq '.status.loadBalancer.ingress[0].ip' | tr -d '"')
+while true; do curl -s -o /dev/null "http://$GATEWAY_IP/productpage"; sleep .5; done &
+
 # check out service graph
 kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=servicegraph -o jsonpath='{.items[0].metadata.name}') 8088:8088 &
 
@@ -12,9 +16,6 @@ kubectl apply -f samples/bookinfo/networking/destination-rule-all-mtls.yaml
 
 # set all services to use v1
 kubectl apply -f samples/bookinfo/networking/virtual-service-all-v1.yaml
-
-# get the url for the app
-export GATEWAY_IP=$(kubectl get svc istio-ingressgateway -n istio-system -o json | jq '.status.loadBalancer.ingress[0].ip' | tr -d '"')
 echo "click here to show app: http://$GATEWAY_IP/productpage"
 
 # set reviews to a/b testing

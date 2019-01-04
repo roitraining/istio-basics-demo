@@ -4,9 +4,9 @@
 
 ### Setup tasks
 1. Open Cloud Shell in a project you own
-1. Clone this repo to Cloud Shell `git clone https://github.com/roitraining/istio-basics-demo`
-1. Run the setup script `. istio-basics-demo/setup.sh`
-1. Open the Slides document here: link
+2. Clone this repo to Cloud Shell `git clone https://github.com/roitraining/istio-basics-demo`
+3. Run the setup script `. istio-basics-demo/setup.sh`
+4. Open the Slides document here: link
 
 The setup script does the following:
 * Enables the GKE API in your project
@@ -17,15 +17,15 @@ The setup script does the following:
 * Deploys the bookinfo gateway
 
 ### Key setup concepts
-+ This deployment will work on any k8s cluster; we just happen to be using GKE.
-+ Sidecar injection is used to automatically insert and configure the Envoy proxy container into pods deployed without having to change the pod/deployment definitions
-+ An Istio gateway replaces a traditional Ingress object. It works like so (to be replaced with better text/image)...
-1. A Load Balancer forwards traffic to a Node
-2. On Node, traffic is delivered to Istio IngressGateway service 
-3. Istio IngressGateway service forwards to an Istio IngressGateway pod
-3. Istio IngressGateway pod is configured by a Gateway and a VirtualService.
-4. Istio IngressGateway pod forwards traffic a service.
-5. Service forwards to an Pod.
+1. This deployment will work on any k8s cluster; we just happen to be using GKE.
+1. Sidecar injection is used to automatically insert and configure the Envoy proxy container into pods deployed without having to change the pod/deployment definitions
+1. An Istio gateway replaces a traditional Ingress object. It works like so (to be replaced with better text/image)...
+    * A Load Balancer forwards traffic to a Node
+    * On Node, traffic is delivered to Istio IngressGateway service 
+    * Istio IngressGateway service forwards to an Istio IngressGateway pod
+    * Istio IngressGateway pod is configured by a Gateway and a VirtualService.
+    * Istio IngressGateway pod forwards traffic a service.
+    * Service forwards to an Pod.
 
 ![enter image description here](https://blog.jayway.com/wp-content/uploads/2018/10/istio-networking.png)
 
@@ -39,13 +39,9 @@ The setup script does the following:
 1. Istio architecture
 
 ### Istio implementation
-1. Show services and pods deployed as part of Istio install (run istio installation snippet)
 1. Show Istio install in GKE UI (services and workloads)
-1. Show Service Graph and discuss. Run service graph snippet, and then use Cloud Shell preview pointed at port 8088. Visit `/dotviz`.
-1. Show Grafana and discuss. Run grafana snippet to build tunnel in Cloud Shell, the use Cloud Shell preview pointed to port 3000, and visit `/dashboard/db/istio-dashboard`.
-1. Show Traceing and discuss. Run tracing snippet and use Cloud Shell preview pointed at port 16686.
 
-### App implementation
+### App deployment
 1. Show app workloads in GKE UI and discuss
 1. Show app services in GKE UI and discuss
 
@@ -71,6 +67,22 @@ Set routing to per-user
 2. Run *canary by user* snippet
 3. Review `samples/bookinfo/networking/virtual-service-reviews-test-v2.yaml
 4. Demo login vs. no routing (log in as jason with no password)
+
+### General Istio info
+1. Generate load against app
+    1. In Cloud Shell, run the *generate load* snippet
+1. Show Service Graph and discuss. 
+    1. Run *service graph* snippet
+    1. Use Cloud Shell preview pointed at port 8088. 
+    1. Visit `https://8088-dot-<2952031>-dot-devshell.appspot.com/force/forcegraph.html `, substituting your proxy #
+1. Show Grafana and discuss. 
+    1. Run the *Grafana* snippet
+    1. Use Cloud Shell preview pointed at port 3000. 
+    1. Visit `https://3000-dot-<2952031>-dot-devshell.appspot.com/dashboard/db/istio-mesh-dashboard`, substituting your proxy #
+1. Show Tracing and discuss. 
+    1. Run *tracing* snippet
+    1. Use Cloud Shell preview pointed at port 16686
+    1. Select a service (e.g. reviews) and review trace
 
 ## Cleanup
 Run `. ../istio-basics-demo/cleanup.sh`

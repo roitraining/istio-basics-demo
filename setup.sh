@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # remove previous istio folder
-rm -rf ./istion-1*
+rm -rf ./istio-1*
 
 # enable api
 gcloud services enable container.googleapis.com
