@@ -6,7 +6,7 @@
 1. Open Cloud Shell in a project you own
 2. Clone this repo to Cloud Shell `git clone https://github.com/roitraining/istio-basics-demo`
 3. Run the setup script `. istio-basics-demo/setup.sh`
-4. Open the Slides document here: link
+4. Open the Slides document here: (https://roi-links.com/2VujI9a)
 
 The setup script does the following:
 * Enables the GKE API in your project
@@ -30,7 +30,6 @@ The setup script does the following:
 ## Demo
 
 ### Intro
-Preso can be found here: (https://roi-links.com/2VujI9a)
 1. Describe the application architecture
 1. Talk through the challenges in managing a mesh of services
 1. Describe the cluster and deployment architecture
@@ -51,9 +50,8 @@ Set up destination rules
 
 Set routing to version 1
 1. Run *use v1* snippet
-2. Run *get the url* snippet to get URL for app
-3. Review `samples/bookinfo/networking/virtual-service-all-v1.yaml`
-4. Visit app URL, and refresh multiple times and call out no starts
+2. Review `samples/bookinfo/networking/virtual-service-all-v1.yaml`
+3. Visit app URL, and refresh multiple times and call out no starts
 
 Set routing to A/B testing of new versions
 1. Run *a/b* snippet
@@ -65,7 +63,7 @@ Set routing to per-user
 1. Discuss real-world need to canary with specific users or customers
 2. Run *canary by user* snippet
 3. Review `samples/bookinfo/networking/virtual-service-reviews-test-v2.yaml
-4. Demo login vs. no routing (log in as jason with no password)
+4. Demo logged in vs. not routing (log in as `jason` with no password)
 
 ### General Istio info
 1. Generate load against app
@@ -73,7 +71,7 @@ Set routing to per-user
 1. Show Service Graph and discuss. 
     1. Run *service graph* snippet
     1. Use Cloud Shell preview pointed at port 8088. 
-    1. Visit `https://8088-dot-<2952031>-dot-devshell.appspot.com/force/forcegraph.html `, substituting your proxy #
+    1. Visit `https://8088-dot-<2952031>-dot-devshell.appspot.com/force/forcegraph.html`, substituting your proxy #
 1. Show Grafana and discuss. 
     1. Run the *Grafana* snippet
     1. Use Cloud Shell preview pointed at port 3000. 

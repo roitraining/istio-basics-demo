@@ -1,5 +1,18 @@
-# generate background load
+# create the destination rules
+kubectl apply -f samples/bookinfo/networking/destination-rule-all-mtls.yaml
+
+# set all services to use v1
+kubectl apply -f samples/bookinfo/networking/virtual-service-all-v1.yaml
 export GATEWAY_IP=$(kubectl get svc istio-ingressgateway -n istio-system -o json | jq '.status.loadBalancer.ingress[0].ip' | tr -d '"')
+echo "click here to show app: http://$GATEWAY_IP/productpage"
+
+# set reviews to a/b testing
+kubectl apply -f samples/bookinfo/networking/virtual-service-reviews-v2-v3.yaml #check it out
+
+# set review to canary by user
+kubectl apply -f samples/bookinfo/networking/virtual-service-reviews-test-v2.yaml
+
+# generate background load
 while true; do curl -s -o /dev/null "http://$GATEWAY_IP/productpage"; sleep .5; done &
 
 # check out service graph
@@ -11,25 +24,15 @@ kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=gr
 # check out tracing
 kubectl port-forward -n istio-system $(kubectl get pod -n istio-system -l app=jaeger -o jsonpath='{.items[0].metadata.name}') 16686:16686 &
 
-# create the destination rules
-kubectl apply -f samples/bookinfo/networking/destination-rule-all-mtls.yaml
+#do the cleanup
+. ../istio-basics-demo/cleanup.sh
 
-# set all services to use v1
-kubectl apply -f samples/bookinfo/networking/virtual-service-all-v1.yaml
-echo "click here to show app: http://$GATEWAY_IP/productpage"
-
-# set reviews to a/b testing
-kubectl apply -f samples/bookinfo/networking/virtual-service-reviews-v2-v3.yaml #check it out
-
-# set review to canary by user
-kubectl apply -f samples/bookinfo/networking/virtual-service-reviews-test-v2.yaml
-
-# show the istio installation
-kubectl get svc -n istio-system
-kubectl get pods -n istio-system
+# misc
 
 # show the destination rules
 kubectl get destinationrules -o yaml
 
-#do the cleanup
-. ../istio-basics-demo/cleanup.sh
+
+# show the istio installation
+kubectl get svc -n istio-system
+kubectl get pods -n istio-system
