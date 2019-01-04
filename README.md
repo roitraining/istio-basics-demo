@@ -32,6 +32,7 @@ The setup script does the following:
 ## Demo
 
 ### Intro
+Preso can be found here: (https://roi-links.com/2VujI9a)
 1. Describe the application architecture
 1. Talk through the challenges in managing a mesh of services
 1. Describe the cluster and deployment architecture
